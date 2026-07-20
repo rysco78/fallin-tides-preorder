@@ -124,7 +124,7 @@
 
     /* Intro line */
     .note-intro {
-      font-size: 1.15rem;
+      font-size: 1.3rem;
       font-weight: 700;
       color: var(--ink-body);
       line-height: 1.55;
@@ -182,6 +182,7 @@
 
     .store-btn {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       flex: 0 0 calc((100% - 24px) / 3);
@@ -192,7 +193,7 @@
       text-align: center;
       padding: 11px 14px;
       min-height: 52px;
-      font-family: Georgia, 'Times New Roman', serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
       font-size: 0.72rem;
       font-weight: 700;
       line-height: 1.3;
@@ -204,6 +205,12 @@
       background: var(--btn-bg);
       color: #ffffff;
       transform: translateY(-1px);
+    }
+    .store-location {
+      font-size: 0.62rem;
+      font-weight: 400;
+      opacity: 0.7;
+      margin-top: 2px;
     }
     .store-btn:focus-visible {
       outline: 3px solid var(--btn-bg);
@@ -299,56 +306,67 @@
              href="https://checkout.square.site/merchant/MLH04JMAGEMFS/checkout/7B56623V5BM2SYF5GSYJIWET"
              target="_blank" rel="noopener noreferrer">
             Chapter &amp; Coast Bookstore
+            <span class="store-location">Miami, FL</span>
           </a>
           <a class="store-btn"
              href="https://tbrshelfbooks.com/collections/pre-orders"
              target="_blank" rel="noopener noreferrer">
             The TBR Shelf
+            <span class="store-location">Fredericksburg, VA</span>
           </a>
           <a class="store-btn"
              href="https://daydreambookstorecafe.com/pre-order-campaigns"
              target="_blank" rel="noopener noreferrer">
             Daydream Bookstore Cafe
+            <span class="store-location">Arlington, TX</span>
           </a>
           <a class="store-btn"
              href="https://flutterbookstore.com/products/events--preorders"
              target="_blank" rel="noopener noreferrer">
             Flutter Romance Bookstore
+            <span class="store-location">Austin, TX</span>
           </a>
           <a class="store-btn"
              href="https://www.theplottwistbookbar.com/product/-preorder-fallin-tides-signed-/Y5LALMQBXFBEV77P37RL65AO"
              target="_blank" rel="noopener noreferrer">
             Plot Twist A Romance Bookbar
+            <span class="store-location">Denton, TX</span>
           </a>
           <a class="store-btn"
              href="https://spicegirlsbookstore.com/collections/pre-orders"
              target="_blank" rel="noopener noreferrer">
             Spice Girls
+            <span class="store-location">Cleburne, TX</span>
           </a>
           <a class="store-btn"
              href="https://thewallflowerbookshop.com/products/fallen-tides-signed-bookplate-tori-ford"
              target="_blank" rel="noopener noreferrer">
             The Wallflower Bookshop
+            <span class="store-location">Vancouver, WA</span>
           </a>
           <a class="store-btn"
              href="https://thechapterco.com/"
              target="_blank" rel="noopener noreferrer">
             The Chapter &amp; Co.
+            <span class="store-location">New Braunfels, TX</span>
           </a>
           <a class="store-btn"
              href="https://flowercrownsfiction.ca/"
              target="_blank" rel="noopener noreferrer">
             flowercrownsfiction
+            <span class="store-location">Online · Canada</span>
           </a>
           <a class="store-btn"
              href="https://therippedbodice.com/"
              target="_blank" rel="noopener noreferrer">
             The Ripped Bodice
+            <span class="store-location">Los Angeles, CA</span>
           </a>
           <a class="store-btn"
              href="https://nowherebookshop.com/list/books-available-preorder"
              target="_blank" rel="noopener noreferrer">
             Nowhere Bookshop
+            <span class="store-location">San Antonio, TX</span>
           </a>
         </div>
       </div>
