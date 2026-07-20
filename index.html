@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preorder Fallin' Tides – Tori Ford</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:        #30386f;
+      --paper:     #faf5eb;
+      --paper-edge: #f0e8d6;
+      --tape:      rgba(196, 192, 214, 0.80);
+      --ink-head:  #1c2255;
+      --ink-body:  #2e2e44;
+      --ink-light: #5a5a78;
+      --btn-bg:    #d3265b;
+      --btn-hover: #d3265b;
+      --star-mark: #c04040;
+    }
+
+    html, body {
+      min-height: 100%;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: url('background-blue.svg');
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 56px 32px;
+      font-family: Georgia, 'Times New Roman', serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Layout shell ─────────────────────────────── */
+    .layout {
+      display: grid;
+      grid-template-columns: 56fr 44fr;
+      align-items: center;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    /* ── Note panel ───────────────────────────────── */
+    .note-panel {
+      position: relative;
+      z-index: 2;
+      min-width: 0;
+    }
+
+    /* Tape strips */
+    .tape {
+      position: absolute;
+      width: 72px;
+      height: 24px;
+      background: var(--tape);
+      border-radius: 2px;
+      z-index: 10;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.14);
+    }
+    /* Subtle stripe texture on tape */
+    .tape::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 3px,
+        rgba(255, 255, 255, 0.09) 3px,
+        rgba(255, 255, 255, 0.09) 4px
+      );
+      border-radius: 2px;
+    }
+
+    .tape-tl { top: -12px; left: 80px;  transform: rotate(-1.5deg); }
+    .tape-tr { top: -12px; right: 80px; transform: rotate(2.2deg);  }
+    .tape-bl { bottom: -12px; left: 80px;  transform: rotate(1deg);  }
+    .tape-br { bottom: -12px; right: 80px; transform: rotate(-2deg); }
+
+    /* Paper */
+    .note {
+      background: var(--paper);
+      /* subtle warm gradient to suggest paper grain from top to bottom */
+      background-image: linear-gradient(170deg, var(--paper) 60%, var(--paper-edge) 100%);
+      padding: 36px 40px 40px;
+      box-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.12),
+        0 10px 32px rgba(0, 0, 0, 0.20),
+        0 28px 60px rgba(0, 0, 0, 0.18);
+    }
+
+    /* Title */
+    .note-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(2rem, 3.4vw, 2.9rem);
+      font-weight: 900;
+      color: var(--ink-head);
+      line-height: 1.08;
+      text-wrap: balance;
+      margin-bottom: 22px;
+      letter-spacing: -0.01em;
+    }
+
+    /* Thin rule between title and body */
+    .note-rule {
+      border: none;
+      border-top: 1.5px solid var(--paper-edge);
+      margin-bottom: 20px;
+    }
+
+    /* Intro line */
+    .note-intro {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ink-body);
+      line-height: 1.55;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+    .note-intro em {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-style: italic;
+      font-weight: 700;
+      color: var(--ink-head);
+    }
+
+    /* Bullet list */
+    .perks {
+      list-style: none;
+      margin-bottom: 36px;
+    }
+    .perks li {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--ink-body);
+      line-height: 1.5;
+      padding: 3px 0;
+    }
+    .perks li::before {
+      content: '★';
+      flex-shrink: 0;
+      font-size: 0.6rem;
+      color: var(--star-mark);
+      position: relative;
+      top: -1px;
+    }
+
+    /* Bookstore grid */
+    .stores-label {
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #d3265b;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .bookstore-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .store-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 calc((100% - 24px) / 3);
+      background: transparent;
+      color: #1c2255;
+      border: 2px solid var(--btn-bg);
+      text-decoration: none;
+      text-align: center;
+      padding: 11px 14px;
+      min-height: 52px;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: 0.01em;
+      border-radius: 50px;
+      transition: background 0.18s ease, color 0.18s ease, transform 0.12s ease;
+    }
+    .store-btn:hover {
+      background: var(--btn-bg);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+    .store-btn:focus-visible {
+      outline: 3px solid var(--btn-bg);
+      outline-offset: 3px;
+    }
+    .store-btn:active {
+      transform: translateY(0);
+    }
+
+    /* ── Image panel ──────────────────────────────── */
+    .image-panel {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-left: -20px;
+      z-index: 1;
+      min-width: 0;
+    }
+
+    .campaign-img {
+      width: 105%;
+      max-width: 540px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 12px 48px rgba(0, 0, 0, 0.50));
+    }
+
+    /* ── Responsive ───────────────────────────────── */
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+        gap: 52px;
+      }
+      .note-panel {
+        max-width: 560px;
+        margin: 0 auto;
+      }
+      .image-panel {
+        max-width: 480px;
+        margin: 0 auto;
+        justify-content: center;
+      }
+      .campaign-img {
+        width: 100%;
+      }
+      .note {
+        padding: 40px 36px 48px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 36px 16px; }
+      .note { padding: 36px 24px 44px; }
+      .bookstore-grid { grid-template-columns: 1fr; }
+      .tape { width: 58px; height: 20px; }
+      .tape-tl, .tape-bl { left: 48px; }
+      .tape-tr, .tape-br { right: 48px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .store-btn { transition: background 0.16s ease; }
+      .store-btn:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="layout">
+
+    <!-- ── Left: Taped Note ─────────────────────── -->
+    <div class="note-panel">
+      <div class="tape tape-tl"></div>
+      <div class="tape tape-tr"></div>
+      <div class="tape tape-bl"></div>
+      <div class="tape tape-br"></div>
+
+      <div class="note">
+        <p class="note-intro">
+          Preorder <em>Fallin&rsquo; Tides</em> from these indie bookstores to receive
+        </p>
+
+        <ul class="perks">
+          <li>Autographed bookplate</li>
+          <li>Bookmark</li>
+          <li>Holly River sticker</li>
+          <li>Exclusive letter from Tori Ford</li>
+        </ul>
+
+        <p class="stores-label">Available at</p>
+
+        <div class="bookstore-grid">
+          <a class="store-btn"
+             href="https://checkout.square.site/merchant/MLH04JMAGEMFS/checkout/7B56623V5BM2SYF5GSYJIWET"
+             target="_blank" rel="noopener noreferrer">
+            Chapter &amp; Coast Bookstore
+          </a>
+          <a class="store-btn"
+             href="https://tbrshelfbooks.com/collections/pre-orders"
+             target="_blank" rel="noopener noreferrer">
+            The TBR Shelf
+          </a>
+          <a class="store-btn"
+             href="https://daydreambookstorecafe.com/pre-order-campaigns"
+             target="_blank" rel="noopener noreferrer">
+            Daydream Bookstore Cafe
+          </a>
+          <a class="store-btn"
+             href="https://flutterbookstore.com/products/events--preorders"
+             target="_blank" rel="noopener noreferrer">
+            Flutter Romance Bookstore
+          </a>
+          <a class="store-btn"
+             href="https://www.theplottwistbookbar.com/product/-preorder-fallin-tides-signed-/Y5LALMQBXFBEV77P37RL65AO"
+             target="_blank" rel="noopener noreferrer">
+            Plot Twist A Romance Bookbar
+          </a>
+          <a class="store-btn"
+             href="https://spicegirlsbookstore.com/collections/pre-orders"
+             target="_blank" rel="noopener noreferrer">
+            Spice Girls
+          </a>
+          <a class="store-btn"
+             href="https://thewallflowerbookshop.com/products/fallen-tides-signed-bookplate-tori-ford"
+             target="_blank" rel="noopener noreferrer">
+            The Wallflower Bookshop
+          </a>
+          <a class="store-btn"
+             href="https://thechapterco.com/"
+             target="_blank" rel="noopener noreferrer">
+            The Chapter &amp; Co.
+          </a>
+          <a class="store-btn"
+             href="https://flowercrownsfiction.ca/"
+             target="_blank" rel="noopener noreferrer">
+            flowercrownsfiction
+          </a>
+          <a class="store-btn"
+             href="https://therippedbodice.com/"
+             target="_blank" rel="noopener noreferrer">
+            The Ripped Bodice
+          </a>
+          <a class="store-btn"
+             href="https://nowherebookshop.com/list/books-available-preorder"
+             target="_blank" rel="noopener noreferrer">
+            Nowhere Bookshop
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Right: Campaign Image ────────────────── -->
+    <div class="image-panel">
+      <img
+        class="campaign-img"
+        src="pre-order-campaign.jpg"
+        alt="Fallin' Tides pre-order incentives: autographed bookplate, bookmark, Holly River sticker, and exclusive letter from Tori Ford"
+      >
+    </div>
+
+  </div>
+
+</body>
+</html>
